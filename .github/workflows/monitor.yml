@@ -21,7 +21,7 @@ jobs:
         run: npm install # Instalacja zależności
 
       - name: Run the script
-        run: node your_script.js # Uruchomienie Twojego skryptu
+        run: node script.js # Uruchomienie Twojego skryptu
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
