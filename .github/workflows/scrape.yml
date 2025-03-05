@@ -1,0 +1,32 @@
+name: Scrape Prices
+
+on:
+  schedule:
+    # Codziennie o 4:00 UTC
+    - cron: "0 4 * * *"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      # Klonowanie repozytorium
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Instalowanie zależności
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      # Instalowanie zależności npm
+      - name: Install dependencies
+        run: npm install
+
+      # Uruchamianie skryptu
+      - name: Run scraping script
+        run: node your-script.js
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
