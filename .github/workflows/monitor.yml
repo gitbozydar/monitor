@@ -1,28 +1,25 @@
-name: Monitor Scraping
+name: Scrape prices and send email
 
 on:
   schedule:
-    - cron: "0 */4 * * *" # Uruchomienie co 4 godziny
-  workflow_dispatch: # Pozwala na ręczne uruchomienie workflow
+    - cron: "0 */4 * * *" # uruchamia skrypt co 4 godziny
+  workflow_dispatch: # umożliwia ręczne uruchomienie
 
 jobs:
-  run_scraping:
-    runs-on: ubuntu-latest # Używa najnowszego systemu Ubuntu
+  scrape:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14" # Określa wersję Node.js
+          node-version: "16" # Zaktualizowano do wersji 16 (lub 14)
 
       - name: Install dependencies
-        run: npm install # Instalacja zależności
+        run: npm install
 
-      - name: Run the script
-        run: node script.js # Uruchomienie Twojego skryptu
-        env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      - name: Run price scraper script
+        run: node script.js # Upewnij się, że nazwa pliku jest poprawna
